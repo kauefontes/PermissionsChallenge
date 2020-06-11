@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Permissions Challenge</string>
+    <string name="title_request_permissions">Request Permissions</string>
+    <string name="title_show_permissions">Show Permissions</string>
+</resources>
