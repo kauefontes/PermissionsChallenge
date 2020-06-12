@@ -29,7 +29,7 @@ public class RequestPermissionRecyclerViewAdapter extends RecyclerView.Adapter<R
     @Override
     public RequestPermissionRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_request_permissions, parent, false);
+                .inflate(R.layout.fragment_request_permission_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -37,11 +37,11 @@ public class RequestPermissionRecyclerViewAdapter extends RecyclerView.Adapter<R
     public void onBindViewHolder(@NonNull RequestPermissionRecyclerViewAdapter.ViewHolder holder, int position) {
         Permission permission = this.permissions.get(position);
 
-        holder.permission.setText(permission.getName());
+        holder.permissionSwitch.setText(permission.getName());
         if (RequestPermission.hasPermission(this.context, permission.getDescription()))
-            holder.permission.setChecked(true);
+            holder.permissionSwitch.setChecked(true);
         else
-            holder.permission.setChecked(false);
+            holder.permissionSwitch.setChecked(false);
     }
 
     @Override
@@ -49,10 +49,11 @@ public class RequestPermissionRecyclerViewAdapter extends RecyclerView.Adapter<R
         return permissions.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public Switch permission;
+        public Switch permissionSwitch;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            permissionSwitch = itemView.findViewById(R.id.switch_set_permission);
         }
     }
 }
