@@ -2,9 +2,11 @@ package io.kpereira.permissionschallenge.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,8 +42,10 @@ public class ShowPermissionRecyclerViewAdapter extends RecyclerView.Adapter<Show
         holder.permissionTextView.setText(permission.getName());
         if (RequestPermission.hasPermission(context, permission.getDescription())) {
             holder.permissionCardView.setCardBackgroundColor(Color.parseColor("#21de7c"));
+            holder.lockIcon.setImageResource(R.drawable.ic_openedlock);
         }else {
             holder.permissionCardView.setCardBackgroundColor(Color.parseColor("#ffcccc"));
+            holder.lockIcon.setImageResource(R.drawable.ic_closedlock);
         }
     }
 
@@ -53,11 +57,13 @@ public class ShowPermissionRecyclerViewAdapter extends RecyclerView.Adapter<Show
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView permissionTextView;
         public CardView permissionCardView;
+        public ImageView lockIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             permissionCardView = itemView.findViewById(R.id.list_permission_carview);
             permissionTextView = itemView.findViewById(R.id.permission_textview);
+            lockIcon = itemView.findViewById(R.id.lock_icon);
         }
     }
 }
