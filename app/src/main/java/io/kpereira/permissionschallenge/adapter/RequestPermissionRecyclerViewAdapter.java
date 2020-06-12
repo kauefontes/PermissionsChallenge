@@ -48,12 +48,24 @@ public class RequestPermissionRecyclerViewAdapter extends RecyclerView.Adapter<R
     public int getItemCount() {
         return permissions.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public Switch permissionSwitch;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             permissionSwitch = itemView.findViewById(R.id.switch_set_permission);
+            permissionSwitch.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Permission permission = permissions.get(position);
+            boolean isGranted = RequestPermission.hasPermission(context, permission.getDescription());
+            if (!isGranted) {
+                RequestPermission.requestPermission(context, permission.getDescription());
+            }
         }
     }
 }
