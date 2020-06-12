@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import io.kpereira.permissionschallenge.R;
 import io.kpereira.permissionschallenge.model.Permission;
+import io.kpereira.permissionschallenge.utils.RequestPermission;
 
 public class RequestPermissionRecyclerViewAdapter extends RecyclerView.Adapter<RequestPermissionRecyclerViewAdapter.ViewHolder> {
     private Context context;
@@ -33,14 +35,21 @@ public class RequestPermissionRecyclerViewAdapter extends RecyclerView.Adapter<R
 
     @Override
     public void onBindViewHolder(@NonNull RequestPermissionRecyclerViewAdapter.ViewHolder holder, int position) {
-        
+        Permission permission = this.permissions.get(position);
+
+        holder.permission.setText(permission.getName());
+        if (RequestPermission.hasPermission(this.context, permission.getDescription()))
+            holder.permission.setChecked(true);
+        else
+            holder.permission.setChecked(false);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return permissions.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public Switch permission;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
