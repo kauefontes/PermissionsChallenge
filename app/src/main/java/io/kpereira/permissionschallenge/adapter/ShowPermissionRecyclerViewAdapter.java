@@ -42,10 +42,10 @@ public class ShowPermissionRecyclerViewAdapter extends RecyclerView.Adapter<Show
         holder.permissionTextView.setText(permission.getName());
         if (RequestPermission.hasPermission(context, permission.getDescription())) {
             holder.permissionCardView.setCardBackgroundColor(Color.parseColor("#21de7c"));
-            holder.lockIcon.setImageResource(R.drawable.ic_openedlock);
+            holder.lockIcon.setImageResource(R.drawable.ic_baseline_lock_open_24);
         }else {
             holder.permissionCardView.setCardBackgroundColor(Color.parseColor("#ffcccc"));
-            holder.lockIcon.setImageResource(R.drawable.ic_closedlock);
+            holder.lockIcon.setImageResource(R.drawable.ic_baseline_lock_24);
         }
     }
 
