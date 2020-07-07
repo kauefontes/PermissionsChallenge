@@ -12,7 +12,7 @@ import io.kpereira.permissionschallenge.data.PermissionRoomDatabase;
 import io.kpereira.permissionschallenge.model.Permission;
 
 public class PermissionRepository {
-    private PermissionDao permissionDao;
+    private static PermissionDao permissionDao;
     private LiveData<List<Permission>> allPermissions;
 
     public PermissionRepository(Application application) {
@@ -29,7 +29,7 @@ public class PermissionRepository {
         new insertAsyncTask(permissionDao).execute(permission);
     }
 
-    private class insertAsyncTask extends AsyncTask<Permission, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<Permission, Void, Void> {
         private PermissionDao asyncTaskDao;
 
         public insertAsyncTask(PermissionDao dao) {
